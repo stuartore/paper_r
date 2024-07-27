@@ -1,2 +1,5 @@
 .DS_Store
 paper_data/基线数据.xlsx
+plots/*.png
+*.png
+
