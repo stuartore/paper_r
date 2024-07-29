@@ -7,6 +7,11 @@
 
 source("~/.Rprofile")
 
+library(sysfonts)
+library(showtextdb)
+library(showtext)
+showtext_auto()
+
 library(readxl)
 library(dplyr)
 library(ggplot2)
@@ -26,8 +31,10 @@ print(paste("AST 的均值为:", mean_ast))
 print(paste("AST 的标准差为:", std_ast))
 
 # 绘制图形
-ggplot(data, aes(x = AST)) + 
+plot <- ggplot(data, aes(x = AST)) + 
   geom_histogram(binwidth = 10, fill = "steelblue", color = "black") + 
   labs(title = "AST 分布", x = "AST 值", y = "频数")
 
-ggsave("plots/myplot.png", width = 12, height = 12) 
+#ggsave("plots/myplot.png", width = 12, height = 12) 
+
+print(plot)
