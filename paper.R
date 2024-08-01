@@ -55,8 +55,8 @@ names_mapping <- c(
      "肌酐" = "Cr", "尿酸" = "Uric acid", "钾" = "K", "钠" = "Na",  "氯" = "Cl", "总钙" = "Ca2+", "尿微量白蛋白" = "Urine microalbumin",
     "空腹血糖mmol/L" = "fasting blood sugar", 
     "24h尿K" = "24h urine K",
-    "24h尿Na" = "24h urine Na", 
-    "立位ARR", "Stand ARR",
+    "24h尿Na" = "24h urine Na",
+    "立位ARR" = "Stand ARR",
     "卧位ARR" = "Recumbent ARR",
     "卧位肾素（5点）" = "Recumbent renin 5am", 
     "立位醛固酮（7点）" = "Orthostatic aldosterone 7am",
@@ -84,11 +84,18 @@ bio_data <- data[ , !(names(data) %in% c('Index', 'BedNum', 'PatientName', 'Hosp
 
 bio_data$AHI_group <- cut(bio_data$AHI_index, 
   breaks = c(-Inf, 15, Inf),
-  labels = c("<15", ">=15"),
+  labels = c("OSA(-)", "OSA(+)"),
   include.lowest = TRUE
 )
+
+bio_data$if_pa <- cut(bio_data$if_pa, 
+  breaks = c(-Inf, 0.5, Inf),
+  labels = c("PA(-)", "PA(+)"),
+  include.lowest = TRUE
+)
+
 cat("\n", names(data))
 
-print(descrTable( AHI_group ~ ., data = bio_data))
+print(descrTable( AHI_group ~ . , data = bio_data))
 
 
